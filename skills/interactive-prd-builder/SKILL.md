@@ -72,7 +72,7 @@ description: 自动化交互式 PRD（产品需求文档）生成工作流。该
 为了实现上述极其复杂的 iframe 状态同步与防死锁机制，**你绝对不能仅凭直觉从零编写 JavaScript 逻辑**。
 
 👉 **CRITICAL (强制动作)**：在生成或修改 `Interactive_PRD.html` 的联动 JS 代码之前，你**必须**使用文件读取工具查看以下资源文档，并严格套用其中的代码模式：
-- **文件路径**：`references/sync-patterns.md`
+- **文件路径**：[references/sync-patterns.md](references/sync-patterns.md)
 - **包含内容**：基于 `getBoundingClientRect()` 的滚动侦听方案、防死锁的“双重防抖”逻辑、以及安全的 iframe 强制重载模式。
 
 ## 执行工作流 (Execution Workflow)
@@ -81,7 +81,7 @@ description: 自动化交互式 PRD（产品需求文档）生成工作流。该
 2. **搭建骨架**：创建包含 Tailwind CDN、Mermaid CDN 的基础 HTML 外壳和三栏布局。添加左上角悬浮的 Icon 控制按钮。
 3. **内容转换与图表净化**：将 Markdown 转换为 HTML，注入 Mermaid 容错隔离渲染代码。
 4. **构建导航与侦听**：生成左侧 TOC 目录，并植入基于 `getBoundingClientRect` 的滚动侦听 JS 代码。
-5. **实现深度路由与联动同步**：**(警告：在编写此步 JS 代码前，必须先读取 `references/sync-patterns.md` 提取标准代码模式)** 实现右侧 iframe 的 Hash 触发联动逻辑，并确保修改对应的 Prototype 文件支持 `hashchange`。在设计 `routingMap` 映射表时，**必须使用可靠的锚点规则（例如仅提取章节序号 `611`），绝对禁止硬编码包含中文字符的完整标题**，以防 PRD 中文标题修改后导致路由解析失败。
+5. **实现深度路由与联动同步**：**(警告：在编写此步 JS 代码前，必须先读取 [references/sync-patterns.md](references/sync-patterns.md) 提取标准代码模式)** 实现右侧 iframe 的 Hash 触发联动逻辑，并确保修改对应的 Prototype 文件支持 `hashchange`。在设计 `routingMap` 映射表时，**必须使用可靠的锚点规则（例如仅提取章节序号 `611`），绝对禁止硬编码包含中文字符的完整标题**，以防 PRD 中文标题修改后导致路由解析失败。
 6. **强制自测验证 (Mandatory Validation)**：
     - **逻辑走查**：检查路由数组的 ID 与生成的 TOC 锚点是否完全匹配。
     - **互斥检查**：检查所有弹窗/抽屉的开启是否做了排他性关闭处理（`classList.remove('open')`）。

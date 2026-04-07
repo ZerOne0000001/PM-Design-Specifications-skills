@@ -1,25 +1,144 @@
-# My Product Management Skills for Trae
+# PM Design Specifications Skills
 
-This repository contains a suite of AI skills designed to automate the product design process in Trae IDE.
+这只是一套帮助产品从重复的文档工作中解脱出来的 **AI 辅助需求设计产出工作流**。
+当前工作流是通过渐进沟通与产出的方式，分多个阶段慢慢帮助产品将脑海中的需求完善成一个高保真、可交互、注释详细的交互 PRD。
 
-## Included Skills
+> ⚠️ **注意：**
+>
+> - ❌️工作流不能替代需求分析与需求调研，业务、场景、用户应该是大家解脱后可以花更多时间思考的内容。
+> - ❌️工作流目前不具备商业分析与目标拆解能力，工作流中目前不涉及到商业分析以及指标拆解、埋点的相关设计，后续会慢慢支持。
 
-1.  **pm-workflow**: Master controller that guides the entire product design process.
-2.  **pm-kickoff**: Handles requirement gathering and project initialization.
-3.  **pm-design**: Generates user stories, flowcharts, and information architecture.
-4.  **pm-prototype**: Creates interactive HTML prototypes.
-5.  **pm-prd**: Compiles everything into a standard PRD document.
+***
 
-## How to Use
+### 📺 演示说明
 
-1.  Clone this repository to your local machine.
-2.  Copy the folders inside `my-product-skills` to your Trae project's `.trae/skills/` directory.
-    *   Example path: `YourProject/.trae/skills/`
-3.  In Trae Chat, type: "Run pm-workflow to start a new product design".
+当前 skill 我会制作视频在小红书与抖音上进行讲解，后续迭代后也会更新在对应平台上。欢迎关注：
 
-## Features
+- **小红书**：蒋道理
+- **抖音**：ZerOne
 
-*   **Sequential Workflow**: Guided step-by-step process.
-*   **Best Practices**: Built-in templates based on real-world PRD standards.
-*   **Interactive Prototyping**: Generates HTML/CSS/JS code directly.
-*   **Hypothesis-Driven**: AI proactively proposes solutions before asking for confirmation.
+### 🔗 参考鸣谢
+
+本 skill 生成交互原型部分参考：[Agile-PM-Workflow](https://github.com/chyxin071-sys/Agile-PM-Workflow)
+  \
+作者（小红书）：小于小于xin
+
+***
+
+## ✨ 核心亮点
+
+- 👀 **适合AI阅读**：核心产出物都为 md 文档，并遵循渐进式披露原则，方便后续技术侧 AI 进行需求理解与阅读。
+- 💬 **渐进式梳理**：“多阶段对话 + 中间产物确认 + 原型可视化”替代“一次性多轮对话产出 PRD”，让产品可以真正“想清楚”与“表达清楚”。
+- **❄️ 多线并发设计**：当前工作流基于文件系统进行记忆而非对话，可以多个需求分多个对话同时进行设计，也可以一个需求拆分多个对话针对大型功能中的不同端口同步进行设计。
+- 💰 **低成本验证**：不会直接生成原型，而是通过中间产物发现与解决漏洞，减少 token 消耗。
+- 📱 **高保真体验**：可以快速产出高保真原型，直接看图优化，直观发现逻辑漏洞。
+- 🧩 **UI风格探索**：在产品设计阶段，AI 同时出多套风格方案，产品像“挑衣服”一样选喜欢的，再深入定制。
+- 🌿 **可交互原型**：支持产出交互原型，将高保真原型嵌入 HTML 版 PRD 中，方便评审，减少与研发沟通成本。
+- 🔄 **可迭代设计**：支持对话调研补充现有系统逻辑，可以支持在已有系统中进行产品设计与迭代。
+- 🐜 **小需求支持**：极小需求（如加个字段）找 AI 做太慢，当前工作流支持快速将已画的原型图转化 PRD。
+- 📂 **结构较完整**：每次设计 AI 会自动匹配迭代，更新迭代目录及需求清单，方便后续追溯。
+
+## 🚀 工作流如何使用？
+
+目前我大部分是在 Trae.ai 的 solo 模式中进行使用的，不过只要你使用的工具支持 skill 就能正常使用。
+
+对于大模型我目前基本用的都是 Gemini 3.1，也用过国产的豆包。两者相比，国产模型会更加朴实一点，基本上会按部就班去问问题；国外模型会更聪明一些，实际生成的结果会更接近期望，但也容易自作聪明跳过限制与步骤。各有优缺点，大家按需使用。不过在生成高保真原型的时候，不同模型的差距非常大。
+
+### 使用步骤：
+
+1. 直接打字说需要设计一个什么需求，或者直接让 AI 读取某个文件夹下的需求（你已画的原型图，不同的需求记得用不同文件夹隔开）。
+2. 在确认迭代后，在 AI 引导下沟通需求背景并且确认最终产物：**【背景文档】**、**【系统调研】**、**【用户故事】**（注意：用户画像等信息已整合在背景文档中）。
+3. 与 AI 发散沟通概念方案（纯文字），并在确认之后与 AI 沟通并确认：**【业务流程】** 与 **【页面信息结构】**。
+4. 让 AI 快速产出核心页面不同 UI 视觉风格的图，确认风格后与 AI 沟通完善高保真原型。
+5. 与 AI 沟通完善 PRD 文档。
+6. 确认生成交互 PRD 之后，检查交互 PRD 的目录跳转与高保真原型的联动是否存在问题。
+
+## 🏗️ 技能架构
+
+```text
+pm-workflow (主控)
+├── pm-kickoff              → 需求启动
+├── pm-design               → 架构与设计
+├── pm-prototype            → 原型制作
+├── pm-prd                  → PRD 输出
+└── interactive-prd-builder → 交互式 PRD (可选)
+```
+
+### 核心技能
+
+| 技能                          | 说明                   | 触发时机         |
+| --------------------------- | -------------------- | ------------ |
+| **pm-workflow**             | 全流程主控，协调迭代生命周期与子技能调度 | 启动新项目或新需求时   |
+| **pm-kickoff**              | 需求调研与背景分析            | 工作流阶段 1      |
+| **pm-design**               | 业务流程设计、用户故事、页面结构     | 工作流阶段 2      |
+| **pm-prototype**            | 高保真 HTML 原型生成        | 工作流阶段 3      |
+| **pm-prd**                  | 标准 PRD 文档输出          | 工作流阶段 4      |
+| **interactive-prd-builder** | 交互式 PRD 网页构建         | 工作流阶段 6 (可选) |
+
+### 支撑技能
+
+| 技能                   | 说明                   |
+| -------------------- | -------------------- |
+| **frontend-design**  | 生成高品质 HTML/CSS/JS 界面 |
+| **mermaid-diagrams** | 流程图、架构图、时序图等图表生成     |
+
+## 🔄 工作流
+
+```text
+阶段 0: 初始化与路由分发
+    ↓
+阶段 1: pm-kickoff (需求背景采集)
+    ↓
+阶段 2: pm-design (系统架构与页面设计)
+    ↓
+阶段 3: pm-prototype (HTML 原型生成)
+    ↓
+阶段 4: pm-prd (PRD 文档编写)
+    ↓
+阶段 5: 迭代收尾
+    ↓
+阶段 6: interactive-prd-builder (可选)
+```
+
+## 📁 目录结构
+
+```text
+skills/
+├── pm-workflow/              # 主控技能
+├── pm-kickoff/               # 需求启动
+│   └── references/           # 示例参考
+├── pm-design/                # 产品设计
+│   └── references/           # 示例参考
+├── pm-prototype/             # 原型制作
+├── pm-prd/                   # PRD 生成
+│   └── references/           # PRD 模板与规范
+├── interactive-prd-builder/  # 交互式 PRD
+│   └── references/           # 同步模式参考
+├── frontend-design/          # 前端界面设计
+├── mermaid-diagrams/         # 图表生成
+│   └── references/           # 各类图表参考
+└── skill-creator/            # 技能创建指导
+```
+
+## 💻 安装与使用
+
+### 安装步骤
+
+1. 下载或 `git clone` 本仓库到本地。
+2. 将 `skills` 文件夹复制到 AI IDE 的全局技能目录：
+   - **Trae / Cursor**: `C:\Users\你的用户名\.trae\skills\` (或 `.cursor\skills\`)
+   - **Mac/Linux**: `~/.trae/skills/` (或 `~/.cursor/skills/`)
+3. 重新启动 AI IDE。
+
+### 使用方法
+
+在 AI 对话框中输入 `/pm-workflow` 或描述你的产品需求，AI 将自动引导你完成完整的阶段工作流。
+
+## 🌟 核心特性
+
+- **渐进式确认**：每个阶段完成后需用户确认才会进入下一阶段。
+- **假设驱动**：AI 先提出预判方案，确认后再执行。
+- **多轮访谈**：深度挖掘需求盲点。
+- **原型验证**：生成可交互的 HTML 原型进行视觉确认。
+- **双向同步**：原型迭代中的变更会逆向同步回设计文档。
+
